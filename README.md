@@ -75,47 +75,20 @@ The central hypothesis is:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Workflows
+## Main Workflow
 
-### Data Extraction and Filtering in Google Earth Engine (GEE)
-
-```mermaid
-flowchart LR
-
-B[Visual identification<br>of rusting reaches with Sentinel-2 imagery<br>2017 & 2020]
-B --> D[Manual river polygon<br>delineation in GEE]
+<img width="1536" height="920" alt="image" src="https://github.com/user-attachments/assets/4b2f7c38-892b-495c-912e-b96406eaf9dd" />
 
 
-E[AlphaEarth annual embeddings] --> F[Apply river masks]
-D --> F
 
-F --> G[Stack yearly 64-band embeddings]
-G --> H[Export GeoTIFFs to Google Drive]
-```
-
-### Analysis and Rusting Detection (Python / Colab)
-
-```mermaid
-flowchart LR
-
-A[Load data and examine mean embedding timeline]
-A --> B[Compute temporal embedding deltas] --> J[Identify layers with most change]
-A --> D[PCA learning on balance pixel sampling for 2017 & 2020]
-
-D --> E[Construct rusting axis<br>via SVD]
-E --> F[Project unseen rivers<br>into PCA space]
-
-F --> H[Scoring with cosine<br>alignment to rust axis]
-
-```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-### 1. Data Sources and Extraction Pipeline
+## Data Sources and Extraction Pipeline
 
-#### Sentinel-2 Imagery for Rusting Delineation
+### Sentinel-2 Imagery for Rusting Delineation
 
-River polygons were manually digitised in GEE. Sentinel-2 surface reflectance imagery (`COPERNICUS/S2_HARMONIZED`) was first used within GEE to visually identify and constrain river sections exhibiting rusting behaviour between 2017 and 2020.
+River polygons were manually digitised in Google Earth Engine (GEE). Sentinel-2 surface reflectance imagery (`COPERNICUS/S2_HARMONIZED`) was first used within GEE to visually identify and constrain river sections exhibiting rusting behaviour between 2017 and 2020.
 
 For each study river:
 
@@ -126,7 +99,7 @@ For each study river:
 These masks were intentionally constrained to the visibly affected river pixels to  provide spatially targeted training data for embedding-space analysis. This minimises inclusion of unaffected reaches, reduces mixed land-water pixels and isolates regions undergoing observable optical change.
 
 
-#### AlphaEarth Embeddings
+### AlphaEarth Embeddings
 
 Embeddings are obtained within GEE from:
 
@@ -137,36 +110,28 @@ Embedding data was masked and clipped to the river polygons to isolate the water
 
 
 
-### Interpretation of the Approach
+## Principal Component Analysis (PCA)
 
-This workflow implements a **data-driven embedding analysis pipeline** where river rusting is treated as a directional shift in high-dimensional feature space.
+This workflow implements a **data-driven embedding analysis pipeline** where river rusting is treated as a directional shift in high-dimensional feature space. <br>
 
-Unlike classification-based approaches, this method:
-
-- operates directly on temporal embedding differences
-- does not require explicit labels for rusting intensity
-- uses PCA as a shared representation space
-- defines rusting as a dominant vector of change rather than a binary class
+Principal Component Analysis (PCA) is used to identify the dominant modes of variability within the AlphaEarth embeddings, which encode each pixel as a 64-dimensional vector representing spectral, spatial and contextual information. Rather than performing PCA on temporal differences directly, the method first combines balanced samples of 2017 and 2020 embeddings from the training rusting rivers into a shared embedding dataset. PCA then learns an orthogonal coordinate system that captures the major axes of variation across these embedding states. Each pixel embedding from both years is projected into this reduced PCA space, allowing temporal change vectors to be computed after projection. In this representation, river rusting can be interpreted as a coherent directional trajectory through embedding space rather than a simple spectral anomaly. The leading components therefore capture structured environmental variation, while the resulting change vectors reveal whether different rivers evolve along a similar “rusting direction”. This enables comparison of temporal behaviour across rivers with different sizes, locations and baseline spectral characteristics, while reducing noise and redundancy present in the original 64-dimensional embeddings.
 
 ### Limitations
 
 - Rust axis is derived from observed rivers only
-- Potential sensitivity to sampling variability
-- Controls are identified from satellite images only, ground truthing would be ideal.
+- There is potential sensitivity to sampling variability
+- Controls are identified from satellite images only, ground truthing of non-rusting rivers would be ideal.
 
 ### Planned Extensions
-
-Future work should include:
-
+By projecting embeddings of candidate rivers to the rusting axis learned in this project, rusting rivers can be identified at large scale. Future work should first refine a universal rusting axis in 64-D space using additional rusting river timelines to train the model. Upscaling this framework to the entire arctic can then be done with:
 * use of Arctic-wide river-network shapefiles
-* automated river polygon generation, clipping shapefile to a 20km grid
+* automated river polygon generation, clipping shapefiles to a 20km grid
 * extraction of embedding for each clipped river segment
 * projection of embeddings in the PCA space learned in this notebook.
 * computation of probabilistic rusting likelihood scores
-* spatial clustering of rusting hotspots
-* further work on explaining embedding decomposition
+Such a dataset could be used to measure direct impacts of climate change on the Arctic and its ecosystems, as well as constrain factors that contribute to river rusting (geology, landscape, hydrogeology, etc.) 
 
-By projecting embeddings of candidate rivers to the rusting axis learned in this project, rusting rivers can be identified at large scale. This framework would benefit from additional ground data to train the PCA model on additional rusting timelines.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
@@ -180,7 +145,7 @@ This project was created using [Google Colab]([https://colab.research.google.com
 
 
 ### Downloading Datasets
-The preliminary data extraction is documented in GEE-compatible .json files. Alpha Earth Embeddings from the Agashashuk, Kugururok and Anaktok rivers have been included in the repository for eaes of use, and can be directly used to run the colab notebook. Download these files in google drive, for which you can get a free account.
+The preliminary data extraction is documented in GEE_Extraction_Pipeline.json. Alpha Earth Embeddings from the Agashashuk, Kugururok and Anaktok rivers as well as nearby control rivers have been included in the repository for eaes of use, and can be directly used to run the colab notebook. Download these files in google drive, for which you can get a free account.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
