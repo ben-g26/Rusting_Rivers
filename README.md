@@ -1,5 +1,6 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
+<img width="1546" height="697" alt="image" src="https://github.com/user-attachments/assets/87c62aff-8b45-4690-bcee-a788afd9f5f4" />
 
 <h1 align="center">Arctic River Rusting Detection using AlphaEarth Embeddings</h1>
 <p align="center">
@@ -11,29 +12,44 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#about-the-project">About the Project</a>
       <ul>
         <li><a href="#background">Background</a></li>
-        <li><a href="#the-sentinel-2-satellite">The SENTINEL-2 Satellite</a></li>
-        <li><a href="#machine-learning-methodology-k-means-clustering">Machine Learning Methodology: K-Means Clustering</a></li>
+        <li><a href="#motivation">Motivation</a></li>
+        <li><a href="#conceptual-framework">Conceptual Framework</a></li>
+        <li><a href="#main-workflow">Main Workflow</a></li>
+        <li>
+          <a href="#data-sources-and-extraction-pipeline">Data Sources and Extraction Pipeline</a>
+          <ul>
+            <li><a href="#sentinel-2-imagery-for-rusting-delineation">Sentinel-2 Imagery for Rusting Delineation</a></li>
+            <li><a href="#alphaearth-embeddings">AlphaEarth Embeddings</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#principal-component-analysis-pca">Principal Component Analysis (PCA)</a>
+          <ul>
+            <li><a href="#limitations">Limitations</a></li>
+            <li><a href="#planned-extensions">Planned Extensions</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#datasets-used">Datasets Used</a></li>
+        <li><a href="#downloading-datasets">Downloading Datasets</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li>
+      <a href="#acknowledgments">Acknowledgments</a>
       <ul>
         <li><a href="#references">References</a></li>
       </ul>
+    </li>
   </ol>
 </details>
-
 
 # About the Project
 This project is a final assignment for GEOL0069 at University College London, created to explore the usage of machine learning (ML) algorithms in Earth Sciences applications. It presents a scalable framework for detecting and characterising river rusting across Arctic environments using Google's Alpha Earth machine learning embeddings. The unsupervised learning method used to intepret the data is Principal Component Analysis (PCA).
@@ -137,7 +153,7 @@ Principal Component Analysis (PCA) is used to identify the dominant modes of var
 - There is potential sensitivity to sampling variability
 - Controls are identified from satellite images only, ground truthing of non-rusting rivers would be ideal.
 
-### Planned Extensions
+## Planned Extensions
 By projecting embeddings of candidate rivers to the rusting axis learned in this project, rusting rivers can be identified at large scale. Future work should first refine a universal rusting axis in 64-D space using additional rusting river timelines to train the model. Upscaling this framework to the entire arctic can then be done with:
 * use of Arctic-wide river-network shapefiles
 * automated river polygon generation, clipping shapefiles to a 20km grid
