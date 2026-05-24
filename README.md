@@ -73,7 +73,7 @@ The central hypothesis is:
 
 > Rusting rivers occupy a coherent directional manifold in embedding-change space that differs from normal temporal variability.
 
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Workflows
 
@@ -108,8 +108,7 @@ E --> F[Project unseen rivers<br>into PCA space]
 F --> H[Scoring with cosine<br>alignment to rust axis]
 
 ```
-
----
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ### 1. Data Sources and Extraction Pipeline
@@ -137,74 +136,6 @@ Each pixel contains a 64-dimensional representation encoding spatial and spectra
 Embedding data was masked and clipped to the river polygons to isolate the water surface, before being exported as a individual GeoTiff files for further analysis (64 layers & 9 years for every pixel).
 
 
-### 2. Data Preparation and Pixel-Level Embedding Extraction
-
-For each river:
-- embedding pixels were sampled from AlphaEarth 64-dimensional annual embeddings
-- only pixels valid in both 2017 and 2020 were retained
-- pixel sets were balanced across rivers to ensure equal contribution during analysis
-
-This produced paired embedding matrices:
-- $x_{2017}$: pixel-level embeddings for 2017
-- $x_{2020}$: corresponding embeddings for 2020
-
-
-### 3. Temporal Change Analysis
-
-An initial analysis of mean changes in embeddings was performed on the three rusting rivers.
-
-$$
-\Delta x = x_{2020} - x_{2017}
-$$
-
-where:
-
-- $x$ is a 64-dimensional embedding
-- $\Delta x$ represents mean movement accross 64 layers 2017 and 2020
-
-There was no obvious changes in embedding structure over time during the study period.
-
-In addition to temporal change over the entire period, embedding changes between 2017 and 2020 were examined to identify which embedding layers exhibited the largest magnitude of change. While no layer single-handedly explains rusting, layer 35 was in the top 6 among all rusting rivers. 
-
-
-### 4. PCA Representation Learning
-
-Principal Component Analysis (PCA) was applied to the combined pixel-level embedding dataset (2017 and 2020 stacked together) to learn a low-dimensional representation of the embedding space.
-
-This step was used to:
-
-- reduce dimensionality of the 64-band embedding space
-- provide a shared coordinate system for both years
-- enable visualisation of temporal trajectories with vectors of mean displacement from 2017 to 2020
-
-The resulting change vectors were consistent in direction within the resulting PC1/PC2 2D space. This indicates a common direction of change among rusting rivers, to be verified with controls (step 6).
-
-This PCA space was used as a reference frame for all subsequent analysis.
-
-### 5. Rust Axis Construction
-
-A dominant direction of temporal change (“rust axis”) was estimated using Singular Value Decomposition (SVD) applied to the displacement vectors:
-
-$$
-r = \text{dominant direction of } \Delta x
-$$
-
-This axis represents the primary coherent direction of embedding change associated with river rusting behaviour across the sampled rivers. 
-
-
-### 6. Projection Scoring in PCA Space and Control Rivers
-
-Three control rivers were used to verify the specificity of the primary direction of change to rusting rivers. The control rivers were chosen as streams which did not exhibit rusting (based on Sentinel-2 analysis) located within 20km of the three rusting rivers. Data extraction was done in the same manner as rusting rivers.
-
-Control rivers were plotted in PCA space and mean temporal displacements were computed as above.
-
-Each river (rusting and control) was scored by measuring alignment with the rust axis using cosine similarity:
-
-- high alignment → consistent rusting-like behaviour
-- low or negative alignment → weak or opposite change direction
-
-
-This provided a quantitative measure of directional change consistency across rusting rivers (over 90% similarity). Controls scored between 10-80%.
 
 ### Interpretation of the Approach
 
@@ -223,7 +154,7 @@ Unlike classification-based approaches, this method:
 - Potential sensitivity to sampling variability
 - Controls are identified from satellite images only, ground truthing would be ideal.
 
-## Planned Extensions
+### Planned Extensions
 
 Future work should include:
 
@@ -236,6 +167,7 @@ Future work should include:
 * further work on explaining embedding decomposition
 
 By projecting embeddings of candidate rivers to the rusting axis learned in this project, rusting rivers can be identified at large scale. This framework would benefit from additional ground data to train the PCA model on additional rusting timelines.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
 # Getting Started
@@ -246,13 +178,16 @@ This project was created using [Google Colab]([https://colab.research.google.com
 3. Modify file paths in the Colab notebook to match the location where the dataset was saved. 
 4. Run the cells of the notebook sequentially. Further instructions can be found in the notebook.
 
+
+### Downloading Datasets
+The preliminary data extraction is documented in GEE-compatible .json files. Alpha Earth Embeddings from the Agashashuk, Kugururok and Anaktok rivers have been included in the repository for eaes of use, and can be directly used to run the colab notebook. Download these files in google drive, for which you can get a free account.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- LICENSE -->
 # License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- CONTACT -->
@@ -273,4 +208,5 @@ Thank you to Dr. Alexander Lipp for guidance during this project.
 
 
 ## References
-*Instrument Payload*. (n.d.). Sentinel Online. https://sentinels.copernicus.eu/web/sentinel/missions/sentinel-2/instrument-payload
+O’Donnell, J. A., Carey, M. P., Koch, J. C., Baughman, C., Hill, K., Zimmerman, C. E., ... & Poulin, B. A. (2024). Metal mobilization from thawing permafrost to aquatic ecosystems is driving rusting of Arctic streams. *Communications Earth & Environment*, 5(1), 268.
+https://doi.org/10.1038/s43247-024-01446-z
