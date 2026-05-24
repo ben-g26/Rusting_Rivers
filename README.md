@@ -44,10 +44,25 @@ The approach is inspired by the findings of O'Donell et al. (2024), [*"Metal mob
 <figure>
   <img width="1735" height="378" alt="Satellite imagery showing river rusting" src="https://github.com/user-attachments/assets/a124c0f9-1dbf-4ae2-8c6e-40712118ff16" />
   <figcaption><i>Figure 1: Visualisation of river rusting and iron mobilisation detected via satellite imagery (O'Donell et al., 2024).</i></figcaption>
+</figure> <br><br/>
+
+The mechanism behind the change in river colour is illustrated in Figure 2. As permafrost thaws by active layer thickening, sulfide minerals such as pyrite are exposed to chemical weathering, releasing sulfate, acid, and trace metals into groundwater and streams.
+<figure>
+ <img width="1566" height="497" alt="image" src="https://github.com/user-attachments/assets/94caaf10-67d7-41f6-a7b9-4715afad3fd2" />
+  <figcaption><i>Figure 2: Mechanism of river rusting from thawing permafrost (O'Donell et al., 2024).</i></figcaption>
+</figure> <br><br/>
+
+River rusting has direct impacts on riverine foodchains and human water use. The main environmental effects are detailed in Figure 3.
+<figure>
+ <img width="1693" height="472" alt="image" src="https://github.com/user-attachments/assets/7e1a28d4-8b4c-42b8-891e-ae0e69a158f4" />
+  <figcaption><i>Figure 3: Impacts of river rusting on humans and foodchains (O'Donell et al., 2024).</i></figcaption>
 </figure>
 
+
+
+This chemical change is altering river ecosystems in many ways
 ### Motivation
-There is a need for a larger database of rusting rivers, to study this phenomenon and better monitor the associated environmental risks. Most existing detection approaches rely on local case studies, RGB visual interpretation and manually selected spectral bands. Improved methods would benefit from integrating high-dimensional contextual information to scale efficiently to continental monitoring. O'Donell et al. (2024) produced timelines of rusting change for three rivers which are used in this project to train an unsupervised learning model. Google's AlphaEarth satellite embeddings are used in this project. Embeddings encode spectral structure and contextual landscape information from lots of satellite products into multi-band latent representations that can be analysed statistically. This enables the design of a large scale detection framework.
+There is a need for a larger database of rusting rivers, to study this phenomenon and better monitor the associated environmental risks. Most existing detection approaches rely on local case studies, RGB visual interpretation and manually selected spectral bands. Improved methods would benefit from integrating high-dimensional contextual information to scale efficiently to continental monitoring. O'Donell et al. (2024) produced timelines of rusting change for three rivers which are used in this project to train an unsupervised learning model. Google's AlphaEarth satellite embeddings provide ready-made high-dimensional data at 10m resolution to train such a model. Embeddings encode spectral structure and contextual landscape information from a large range of satellite products into multi-band latent representations that can be analysed statistically. This enables the design of a large scale detection framework.
 
 This repository explores whether rusting rivers exhibit coherent trajectories in embedding space that can be learned and generalised, using
 * pixel-level statistical analysis
