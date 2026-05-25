@@ -137,6 +137,13 @@ Embeddings are obtained within GEE from:
 
 `GOOGLE/SATELLITE_EMBEDDING/V1/ANNUAL`
 
+Embeddings are extracted for rusting rivers and their non-rusting control. Controls are nearby river segments not affected by rusting:
+<figure>
+<img width="521" height="339" alt="image" src="https://github.com/user-attachments/assets/cef54059-dc92-46df-8461-1980cf8dc3c5" />
+    <br>
+  <figcaption><i>Figure 5: Agashashok river shapefiles for rusting river section (blue) and the upstream non-affected control (red).</i></figcaption>
+</figure> <br><br/>
+
 Each pixel contains a 64-dimensional representation encoding spatial and spectral structure.
 Embedding data was masked and clipped to the river polygons to isolate the water surface, before being exported as a individual GeoTiff files for further analysis (64 layers & 9 years for every pixel).
 
@@ -150,7 +157,7 @@ Principal Component Analysis (PCA) is used to identify the dominant modes of var
 
 ### Limitations
 
-- Rust axis is derived from observed rivers only
+- Rust axis is derived from a limited number of rivers
 - There is potential sensitivity to sampling variability
 - Controls are identified from satellite images only, ground truthing of non-rusting rivers would be ideal.
 
