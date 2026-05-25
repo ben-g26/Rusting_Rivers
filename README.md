@@ -108,9 +108,10 @@ The central hypothesis is:
 
 ## Main Workflow
 
+<figure>
 <img width="1536" height="920" alt="image" src="https://github.com/user-attachments/assets/4b2f7c38-892b-495c-912e-b96406eaf9dd" />
-
-
+  <figcaption><i>Figure 4: Data processing workflow.</i></figcaption>
+</figure> <br><br/>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
