@@ -2,7 +2,7 @@
 <a name="readme-top"></a>
 <img width="1546" height="697" alt="image" src="https://github.com/user-attachments/assets/87c62aff-8b45-4690-bcee-a788afd9f5f4" />
 
-<h1 align="center">Arctic River Rusting Detection using AlphaEarth Embeddings</h1>
+<h1 align="center">Arctic River Rusting Detection using Alpha Earth Satellite Embeddings</h1>
 <p align="center">
     Using Principal Component Analysis (PCA) on high-dimensional ML products.
   </p>
