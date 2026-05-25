@@ -109,8 +109,8 @@ The central hypothesis is:
 ## Main Workflow
 
 <figure>
-<img width="1536" height="920" alt="image" src="https://github.com/user-attachments/assets/4b2f7c38-892b-495c-912e-b96406eaf9dd" />
-  <figcaption><i>Figure 4: Data processing workflow.</i></figcaption>
+<img width="1536" height="929" alt="ChatGPT Image May 25, 2026" src="https://github.com/user-attachments/assets/f091e3a7-3f16-4877-be4c-a60cf4582530" />
+  <figcaption><i>Figure 4: Data processing workflow. This figure was refined using ChatGPT Images.</i></figcaption>
 </figure> <br><br/>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
